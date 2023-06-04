@@ -1,0 +1,38 @@
+{% extends "themes/base_user.html.twig" %}
+
+{% block title %} Profile utilisateur {% endblock %}
+
+{% block description %} Profile utilisateur {% endblock %}
+
+{% block main %}
+    <h1 class="text-center mt-5 my-3 display-5">Espace privé</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="text-center alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="text-center display-5">Mon profil</h1>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title my-2"><strong><u>Prénom</u></strong> : {{ app.user.firstName }}</h5>
+                <h5 class="card-title my-2"><strong><u>Nom</u></strong> : {{ app.user.lastName }}</h5>
+                <h5 class="card-title my-2"><strong><u>Email</u></strong> : {{ app.user.email }}</h5>
+                <a href="{{ path('user.profile.edit') }}" class="btn btn-secondary my-2">Modifier le profil</a> 
+                <a href="{{ path('user.profile.edit_password') }}" class="btn btn-dark my-2">Modifier le mot de passe</a>
+                {# <a onclick="event.preventDefault(); confirm('Confirmer la suppression') && document.querySelector('.delete_user_{{ app.user.id }}').submit()" href="" class="text-danger m-2" title="Supprimer"> Supprimer mon compte</a>
+                                
+                    <form class="delete_user_{{ app.user.id }}" method="POST" action="{{  path('admin.user.delete', {'id': app.user.id})}}" class="d-none">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('user_' ~ app.user.id ) }}" />
+                    </form> #}
+                    
+                {# <a alert href="" class="btn btn-danger my-2">Suprimer mon compte</a> #}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "themes/base_visitor.html.twig" %}
+
+{% block title %} Page d'acceuil {% endblock %}
+
+{% block description %} Page d'acceuil {% endblock %}
+
+{% block main %}
+
+{% for message in app.flashes('success') %}
+<div class="text-center alert alert-success alert-dismissible fade show mt-5" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+  {# Navbar #}
+  {% include "layouts/acceuil/_welcome_visitor_user.html.twig" %}
+
+  
+
+{% endblock %}

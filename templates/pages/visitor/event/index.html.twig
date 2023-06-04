@@ -1,0 +1,87 @@
+{% extends "themes/base_visitor.html.twig" %}
+
+{% block title %} Nos évenements{% endblock %}
+
+{% block description %} Nos évenements{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 mt-5 display-5">Nos évenements</h1>
+
+    <div class="container-fluid text-md-center mt-5 my-3">
+        
+    {# Dropdowns row #}
+        <div class="row">
+            <h5 class="text-center my-3">Filtrer par</h5>
+            <div class="col-md-6">
+                <div class="dropdown my-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Les catégories
+                    </button>
+                    <ul class="dropdown-menu">
+                        {% if categories|length == 0 %}
+                        <li><a class="dropdown-item" href="#">Aucune catégorie</a></li>
+                        {% else %}
+                        {% for category in categories %}
+                        <li><a class="dropdown-item" href="{{ path('visitor.event.posts.filter_by_category', {'id': category.id, 'slug': category.slug}) }}">{{ category.name }}</a></li>
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="dropdown my-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Tags
+                    </button>
+                    <ul class="dropdown-menu">
+                        {% if tags|length == 0 %}
+                        <li><a class="dropdown-item" href="#">Aucun tag</a></li>
+                        {% else %}
+                        {% for tag in tags %}
+                        <li><a class="dropdown-item" href="{{ path('visitor.event.posts.filter_by_tag',  {'id': tag.id, 'slug': tag.slug}) }}">{{ tag.name }}</a></li>
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <a class="" href="{{ path('visitor.cancel_filter') }}">annuler les filtres</a>
+        </div>
+        
+        {# Post row #}
+        <div class="row mt-5">
+            <div class="col-md-7 mx-auto">
+                {% for post in posts %}
+                    <div class="card mb-3 shadow">
+                        <div class="row g-0">
+                        <div class="col-md-4">
+                            {% if post.image %}
+                                <img class="img-fluid rounded-start"  src="{{ vich_uploader_asset(post, 'imageFile')  | imagine_filter('visitor_blog_post_image_thumb') }}" alt="{{ post.title }}"> 
+                            {% else %}
+                                <img class="img-fluid rounded-start" src="{{ asset('images/static/admin/post/default-post-image.jpg') }}" />
+                            {% endif %} 
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body text-start">
+                                <h5 class="card-title text-center">{{ post.title }}</h5>
+                                {# {# <h6 class="">Adresse : {{ post.address }}</h6> #}
+                                <h6 class="">Date : {{ post.date }}</h6> 
+                                <p class="card-text">{{ post.content|striptags|u.truncate(70, '...')|raw }}</p>
+                                <p>
+                                    {% for tag in post.tags %}
+                                    <a href="{{ path('visitor.event.posts.filter_by_tag', {'id': tag.id, 'slug': tag.slug}) }}"><span class="badge text-bg-warning me-1">{{ tag.name }}</span></a>
+                                    {% endfor %}
+                                </p>
+                                <p><a href="{{ path('visitor.event.post.show', {'id' : post.id, 'slug': post.slug}) }}" class="btn btn-primary">Lire l'article</a></p>
+                                <p class="card-text"><small class="text-muted">Publié {{ post.publishedAt|ago }}</small></p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}

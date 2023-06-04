@@ -1,0 +1,12 @@
+{% extends "themes/base_user.html.twig" %}
+
+{% block title %} - Espace d'utilisateur{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Hello {{ app.user.firstName }} {{ app.user.lastName }} </h1>
+
+    {# Navbar #}
+    {% include "layouts/acceuil/_welcome_visitor_user.html.twig" %}
+
+
+{% endblock %}

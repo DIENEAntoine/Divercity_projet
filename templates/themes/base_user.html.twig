@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Divercity {% block title %}{% endblock %}</title>
+
+        {# favicon #}
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon/favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ asset('images/favicon/site.webmanifest') }}">
+        <link rel="mask-icon" href="{{ asset('images/favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+
+        {# font family #}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
+
+        {# Font awesome #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        {# Chargement de bootstrap et css depuis webpack encore #}
+        {% block webpack_css %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {# Chargement de la partie JS de bootstrap et du javascript depuis webpack encore #}
+        {% block webpack_js %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+       
+    </head>
+    <body class="bg-light body-visitor">
+        
+        {# Navbar #}
+        {% include "layouts/navbar/_navbar_user.html.twig" %}
+        
+        {# Contenu spécifique de chaque page #}
+        <main class="container-fluid">
+            {% block main %}
+
+            {% endblock %}
+        </main>
+
+        {# footer #}
+        {% include "layouts/footer/_footer_user.html.twig" %}
+
+    </body>
+</html>
